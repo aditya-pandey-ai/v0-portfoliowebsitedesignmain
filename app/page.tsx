@@ -5,6 +5,7 @@ import React from "react"
 import { Button } from "@/components/ui/button"
 import { Github, Linkedin, Mail, ExternalLink, Download, Award, TrendingUp, Users, Code } from "lucide-react"
 import { useEffect, useState } from "react"
+import Link from "next/link"
 
 const PlayStationX = () => <img src="/playstation-x.svg" alt="PlayStation X" className="w-12 h-12" />
 
@@ -19,6 +20,71 @@ const LeMansLogo = () => <img src="/le-mans-logo.svg" alt="Le Mans Logo" classNa
 const LeMansClassic = () => <img src="/le-mans-classic.svg" alt="Le Mans Classic" className="w-16 h-12" />
 
 const MotoGPLogo = () => <img src="/motogp-logo.svg" alt="MotoGP Logo" className="w-16 h-12" />
+
+const SF = () => <img src="/sf.svg" alt="SF Logo" className="w-16 h-12" />
+
+const WEC = () => <img src="/WEC_Logo.svg" alt="WEC Logo" className="w-16 h-12" />
+
+const AnimatedFloatingIcon = ({ Component, index }: { Component: React.ComponentType; index: number }) => {
+  const [position, setPosition] = useState({
+    x: Math.random() * 90 + 5,
+    y: Math.random() * 90 + 5,
+  })
+  const [direction, setDirection] = useState({
+    x: (Math.random() - 0.5) * 0.5,
+    y: (Math.random() - 0.5) * 0.5,
+  })
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPosition((prev) => {
+        let newX = prev.x + direction.x
+        let newY = prev.y + direction.y
+
+        // Bounce off edges
+        if (newX <= 0 || newX >= 95) {
+          setDirection((d) => ({ ...d, x: -d.x }))
+          newX = Math.max(0, Math.min(95, newX))
+        }
+        if (newY <= 0 || newY >= 95) {
+          setDirection((d) => ({ ...d, y: -d.y }))
+          newY = Math.max(0, Math.min(95, newY))
+        }
+
+        return { x: newX, y: newY }
+      })
+    }, 100)
+
+    // Change direction randomly every 3-8 seconds
+    const directionInterval = setInterval(
+      () => {
+        setDirection({
+          x: (Math.random() - 0.5) * 0.8,
+          y: (Math.random() - 0.5) * 0.8,
+        })
+      },
+      Math.random() * 5000 + 3000,
+    )
+
+    return () => {
+      clearInterval(interval)
+      clearInterval(directionInterval)
+    }
+  }, [direction.x, direction.y])
+
+  return (
+    <div
+      className="absolute text-stone-500 transition-all duration-100 ease-linear"
+      style={{
+        left: `${position.x}%`,
+        top: `${position.y}%`,
+        transform: `rotate(${Math.sin(Date.now() * 0.001 + index) * 10}deg)`,
+      }}
+    >
+      <Component />
+    </div>
+  )
+}
 
 const AnimatedName = () => {
   const [isHovered, setIsHovered] = useState(false)
@@ -156,10 +222,13 @@ export default function Portfolio() {
     { Component: LeMansLogo, id: 4 },
     { Component: LeMansClassic, id: 5 },
     { Component: MotoGPLogo, id: 6 },
+    { Component: SF, id: 7 },
+    { Component: WEC, id: 8 },
   ]
 
   const projects = [
     {
+      id: "cricket-ball-detection",
       title: "Real-Time Cricket Ball Detection & Tracking",
       subtitle: "Computer Vision Project",
       description:
@@ -173,6 +242,7 @@ export default function Portfolio() {
       demo: "#",
     },
     {
+      id: "elt-pipeline",
       title: "End-to-End ELT Pipeline for TPCH Dataset",
       subtitle: "Data Engineering Project",
       description:
@@ -186,6 +256,7 @@ export default function Portfolio() {
       demo: "#",
     },
     {
+      id: "ai-marketing-agent",
       title: "AI Marketing Automation Agent",
       subtitle: "Agentic AI System",
       description:
@@ -199,6 +270,7 @@ export default function Portfolio() {
       demo: "#",
     },
     {
+      id: "neocypher",
       title: "NeoCypher",
       subtitle: "Graph Database & AI Project",
       description:
@@ -212,6 +284,7 @@ export default function Portfolio() {
       demo: "#",
     },
     {
+      id: "quanto",
       title: "Quanto",
       subtitle: "Quantitative Analysis Platform",
       description:
@@ -225,19 +298,20 @@ export default function Portfolio() {
       demo: "#",
     },
     {
-      title: "Network Security",
-      subtitle: "Cybersecurity & AI Project",
+      id: "network-security",
+      title: "EdgeNodes",
+      subtitle: "Cybersecurity & MLOps Project",
       description:
-        "An intelligent network security system that uses machine learning to detect and prevent cyber threats in real-time. Combines traditional security protocols with modern AI techniques to create adaptive defense mechanisms.",
+        "EdgeNodes is a phishing detection system powered by machine learning, designed with a full MLOps pipeline and AWS cloud deployment for real-time security.",
       story:
-        "The inspiration came from watching traditional security systems fail against sophisticated attacks. By implementing behavioral analysis and anomaly detection, I created a system that learns from attack patterns and adapts its defenses automatically.",
-      impact: "AI-powered threat detection",
-      metrics: ["Real-time monitoring", "Anomaly detection", "Automated response", "Threat intelligence"],
-      tech: ["Python", "Machine Learning", "Network Protocols", "Cybersecurity"],
+        "I built EdgeNodes to tackle the growing issue of phishing websites. What started as a simple classifier turned into a complete MLOps-driven system with automated pipelines, experiment tracking, and cloud deployment.",
+      impact: "End-to-end AI security pipeline",
+      metrics: ["End-to-end MLOps pipeline","AWS cloud deployment","MLflow tracking","High accuracy classification"],
+      tech: ["Python", "scikit-learn", "MLflow", "AWS (S3, ECR, EC2)", "Docker", "MLOps"],
       github: "https://github.com/aditya-pandey-ai/Network-Security",
-      demo: "#",
-    },
-  ]
+      demo: "#"
+},
+]
 
   const achievements = [
     { metric: "3", label: "Major Projects Completed", icon: <Award className="w-6 h-6" /> },
@@ -247,7 +321,7 @@ export default function Portfolio() {
   ]
 
   return (
-    <div className="min-h-screen bg-stone-100 text-stone-800 relative overflow-hidden font-serif">
+    <div className="min-h-screen bg-stone-100 text-stone-800 relative overflow-hidden">
       {/* Background Pattern */}
       <div className="fixed inset-0 opacity-10 pointer-events-none">
         <div
@@ -265,16 +339,7 @@ export default function Portfolio() {
 
       <div className="fixed inset-0 opacity-30 pointer-events-none overflow-hidden">
         {floatingIcons.map((icon, index) => (
-          <div
-            key={icon.id}
-            className={`absolute text-stone-500 floating-icon-${index + 1}`}
-            style={{
-              left: `${Math.random() * 90 + 5}%`,
-              top: `${Math.random() * 90 + 5}%`,
-            }}
-          >
-            <icon.Component />
-          </div>
+          <AnimatedFloatingIcon key={icon.id} Component={icon.Component} index={index} />
         ))}
       </div>
 
@@ -328,7 +393,7 @@ export default function Portfolio() {
           <div className="grid lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
               <div className="border-l-4 border-stone-600 pl-6 mb-8 overflow-hidden">
-                <h2 className="text-4xl md:text-6xl font-bold leading-tight mb-4 animate-pulse font-serif text-stone-800">
+                <h2 className="text-4xl md:text-6xl font-bold leading-tight mb-4 animate-pulse font-sans text-stone-800">
                   BUILDING INTELLIGENT
                   <br />
                   <span className="italic bg-gradient-to-r from-stone-700 to-stone-500 bg-clip-text text-transparent">
@@ -340,13 +405,13 @@ export default function Portfolio() {
               <div className="flex flex-wrap gap-4 mb-8">
                 <Button
                   onClick={() => scrollToSection("projects")}
-                  className="bg-stone-700 text-white hover:bg-stone-600 px-8 py-3 transform transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                  className="bg-stone-700 text-white hover:bg-stone-600 px-8 py-3 transform transition-all duration-300 hover:scale-105 hover:shadow-lg font-sans"
                 >
                   View Projects
                 </Button>
                 <Button
                   variant="outline"
-                  className="border-stone-700 text-stone-700 hover:bg-stone-700 hover:text-white px-8 py-3 bg-transparent transform transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                  className="border-stone-700 text-stone-700 hover:bg-stone-700 hover:text-white px-8 py-3 bg-transparent transform transition-all duration-300 hover:scale-105 hover:shadow-lg font-sans"
                   asChild
                 >
                   <a href="#" target="_blank" rel="noreferrer">
@@ -359,8 +424,7 @@ export default function Portfolio() {
               <div className="space-y-6">
                 <div className="border-l-4 border-stone-500 pl-6">
                   <p className="text-lg text-stone-600 italic leading-relaxed font-sans">
-                    "I don't just build AI models—I craft intelligent systems that think, learn, and solve real
-                    problems. Every line of code is a step toward making machines truly understand our world."
+                    "I don't just build AI models—I craft intelligent systems that think, learn, and solve real problems. Every line of code is a step toward making machines truly understand our world."
                   </p>
                 </div>
 
@@ -393,7 +457,7 @@ export default function Portfolio() {
                 </div>
 
                 <div className="border-2 border-stone-600 p-6 bg-stone-50">
-                  <h4 className="font-bold text-lg uppercase tracking-wide mb-4 border-b border-stone-500 pb-2 font-serif text-stone-800">
+                  <h4 className="font-bold text-lg uppercase tracking-wide mb-4 border-b border-stone-500 pb-2 font-sans text-stone-800">
                     What I'm Building Right Now
                   </h4>
                   <div className="space-y-3">
@@ -438,7 +502,7 @@ export default function Portfolio() {
                     alt="Aditya Pandey"
                     className="w-32 h-32 rounded-full border-4 border-stone-600 mb-4 object-cover"
                   />
-                  <h3 className="text-xl font-bold mb-2 uppercase tracking-wide font-serif text-stone-800">PROFILE</h3>
+                  <h3 className="text-xl font-bold mb-2 uppercase tracking-wide font-sans text-stone-800">PROFILE</h3>
                   <div className="w-12 h-0.5 bg-stone-600 mb-4"></div>
                 </div>
 
@@ -480,7 +544,7 @@ export default function Portfolio() {
       >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 transform transition-all duration-700 font-serif">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 transform transition-all duration-700 font-sans">
               FEATURED PROJECTS
             </h2>
             <div
@@ -492,14 +556,14 @@ export default function Portfolio() {
             {projects.map((project, index) => (
               <article
                 key={index}
-                className={`border-2 p-6 transform transition-all duration-700 hover:scale-105 hover:shadow-2xl bg-stone-50 border-stone-600 hover:border-stone-500 ${
+                className={`border-2 p-6 transform transition-all duration-700 hover:scale-105 hover:shadow-2xl bg-stone-50 border-stone-600 hover:border-stone-500 cursor-pointer ${
                   visibleSections.has("projects") ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0"
                 }`}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
                 <div className={`border-b pb-4 mb-4 group border-stone-500`}>
                   <h3
-                    className={`text-xl font-bold leading-tight mb-2 transition-colors duration-300 group-hover:text-stone-600 font-serif text-stone-800`}
+                    className={`text-xl font-bold leading-tight mb-2 transition-colors duration-300 group-hover:text-stone-600 font-sans text-stone-800`}
                   >
                     {project.title}
                   </h3>
@@ -526,7 +590,7 @@ export default function Portfolio() {
                       className={`text-center border p-2 transform transition-all duration-300 hover:scale-105 border-stone-500 hover:bg-stone-700 hover:text-white hover:border-stone-700`}
                       style={{ transitionDelay: `${idx * 50}ms` }}
                     >
-                      <span className="font-bold text-xs">{metric}</span>
+                      <span className="font-bold text-xs font-sans">{metric}</span>
                     </div>
                   ))}
                 </div>
@@ -535,7 +599,7 @@ export default function Portfolio() {
                   <Button
                     variant="outline"
                     size="sm"
-                    className={`bg-transparent transform transition-all duration-300 hover:scale-105 border-stone-600 text-stone-900 hover:bg-stone-700 hover:text-white flex-1`}
+                    className={`bg-transparent transform transition-all duration-300 hover:scale-105 border-stone-600 text-stone-900 hover:bg-stone-700 hover:text-white flex-1 font-sans`}
                     asChild
                   >
                     <a href={project.github} target="_blank" rel="noreferrer">
@@ -545,10 +609,13 @@ export default function Portfolio() {
                   </Button>
                   <Button
                     size="sm"
-                    className={`transform transition-all duration-300 hover:scale-105 bg-stone-100 text-stone-900 hover:bg-stone-200 flex-1`}
+                    className={`transform transition-all duration-300 hover:scale-105 bg-stone-100 text-stone-900 hover:bg-stone-200 flex-1 font-sans`}
+                    asChild
                   >
-                    <ExternalLink className="w-3 h-3 mr-1" />
-                    Details
+                    <Link href={`/projects/${project.id}`}>
+                      <ExternalLink className="w-3 h-3 mr-1" />
+                      Details
+                    </Link>
                   </Button>
                 </div>
               </article>
@@ -565,7 +632,7 @@ export default function Portfolio() {
       >
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 font-serif">TECHNICAL EXPERTISE</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 font-sans">TECHNICAL EXPERTISE</h2>
             <div className={`w-24 h-1 mx-auto bg-stone-600`}></div>
           </div>
 
@@ -614,7 +681,7 @@ export default function Portfolio() {
                 style={{ transitionDelay: `${index * 200}ms` }}
               >
                 <h3
-                  className={`text-xl font-bold mb-4 border-b pb-2 transition-colors duration-300 border-stone-500 font-serif text-stone-800`}
+                  className={`text-xl font-bold mb-4 border-b pb-2 transition-colors duration-300 border-stone-500 font-sans text-stone-800`}
                 >
                   {category.title}
                 </h3>
@@ -635,19 +702,25 @@ export default function Portfolio() {
             }`}
             style={{ transitionDelay: "600ms" }}
           >
-            <h3 className="text-2xl font-bold text-center mb-8">CERTIFICATIONS</h3>
+            <h3 className="text-2xl font-bold text-center mb-8 font-sans">CERTIFICATIONS</h3>
             <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
               <div
                 className={`border p-6 text-center transform transition-all duration-300 hover:scale-105 hover:shadow-lg border-stone-600 hover:border-stone-500`}
               >
-                <h4 className="font-bold mb-2">Machine Learning Specialization</h4>
-                <p className={`text-sm text-stone-600`}>Andrew NG, Stanford University • Nov 2023</p>
+                <h4 className="font-bold mb-2 font-sans">AWS Certified Cloud Practicioner</h4>
+                <p className={`text-sm text-stone-600 font-sans`}>AWS • Sep 2025</p>
               </div>
               <div
                 className={`border p-6 text-center transform transition-all duration-300 hover:scale-105 hover:shadow-lg border-stone-600 hover:border-stone-500`}
               >
-                <h4 className="font-bold mb-2">Google Cybersecurity Professional Certificate</h4>
-                <p className={`text-sm text-stone-600`}>Google Careers • Apr 2024</p>
+                <h4 className="font-bold mb-2 font-sans">Machine Learning Specialization</h4>
+                <p className={`text-sm text-stone-600 font-sans`}>Andrew NG, Stanford University • Nov 2023</p>
+              </div>
+              <div
+                className={`border p-6 text-center transform transition-all duration-300 hover:scale-105 hover:shadow-lg border-stone-600 hover:border-stone-500`}
+              >
+                <h4 className="font-bold mb-2 font-sans">Google Cybersecurity Professional Certificate</h4>
+                <p className={`text-sm text-stone-600 font-sans`}>Google Careers • Apr 2024</p>
               </div>
             </div>
           </div>
@@ -661,7 +734,7 @@ export default function Portfolio() {
         }`}
       >
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="text-4xl md:text-5xl font-bold mb-8 font-serif">LET'S CONNECT</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-8 font-sans">LET'S CONNECT</h2>
           <p className="text-xl mb-12 max-w-2xl mx-auto font-sans">
             Passionate about building intelligent systems and ready to contribute to innovative AI projects. Available
             for internships and full-time opportunities.
@@ -688,9 +761,10 @@ export default function Portfolio() {
                 subtitle: "github.com/aditya-pandey-ai",
               },
             ].map((contact, index) => (
+              // Fixed font consistency - using font-sans for contact buttons
               <Button
                 key={index}
-                className={`p-6 h-auto flex-col transform transition-all duration-500 hover:scale-110 hover:rotate-1 hover:shadow-2xl bg-stone-700 text-white hover:bg-stone-600 ${
+                className={`p-6 h-auto flex-col transform transition-all duration-500 hover:scale-110 hover:rotate-1 hover:shadow-2xl bg-stone-700 text-white hover:bg-stone-600 font-sans ${
                   visibleSections.has("contact") ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
                 }`}
                 style={{ transitionDelay: `${index * 150}ms` }}

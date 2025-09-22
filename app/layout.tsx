@@ -1,27 +1,45 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter, Source_Code_Pro, Crimson_Text } from "next/font/google"
-import { Analytics } from "@vercel/analytics/next"
+import localFont from "next/font/local"
 import { Suspense } from "react"
 import "./globals.css"
+import LoadingScreen from "@/components/loading-screen"
 
-const inter = Inter({
-  subsets: ["latin"],
+const formula1 = localFont({
+  src: [
+    {
+      path: "./fonts/Formula1-Regular-1.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Formula1-Bold_web.ttf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Formula1-Bold-4.ttf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Formula1-Black.ttf",
+      weight: "900",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Formula1-Italic.ttf",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "./fonts/Formula1-Wide.ttf",
+      weight: "600",
+      style: "normal",
+    },
+  ],
+  variable: "--font-formula1",
   display: "swap",
-  variable: "--font-inter",
-})
-
-const sourceCodePro = Source_Code_Pro({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-source-code-pro",
-})
-
-const crimsonText = Crimson_Text({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-  display: "swap",
-  variable: "--font-crimson-text",
 })
 
 export const metadata: Metadata = {
@@ -37,12 +55,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${sourceCodePro.variable} ${crimsonText.variable} antialiased`}>
+    <html lang="en" className={`${formula1.variable} antialiased`}>
       <body className="font-sans bg-background text-foreground">
-        <Suspense fallback={null}>
-          {children}
-          <Analytics />
-        </Suspense>
+        <Suspense fallback={<LoadingScreen />}>{children}</Suspense>
       </body>
     </html>
   )
