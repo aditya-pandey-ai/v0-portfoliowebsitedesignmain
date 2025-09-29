@@ -7,56 +7,56 @@ import { useState } from "react"
 
 const projects = [
   {
-  "id": "cricket-ball-detection",
-  "title": "Real-Time Cricket Ball Tracking",
-  "subtitle": "Computer Vision Project",
-  "description":
-    "A real-time cricket ball tracking system using YOLOv8 for detection and SORT for tracking. The system detects the ball, assigns unique IDs, and visualizes its trajectory in live video.",
-  "fullDescription": `This project applies deep learning and object tracking to one of the toughest problems in sports vision: tracking a cricket ball moving at professional speeds.
+    id: "cricket-ball-detection",
+    title: "Real-Time Cricket Ball Tracking",
+    subtitle: "Computer Vision Project",
+    description:
+      "A real-time cricket ball tracking system using YOLOv8 for detection and SORT for tracking. The system detects the ball, assigns unique IDs, and visualizes its trajectory in live video.",
+    fullDescription: `This project applies deep learning and object tracking to one of the toughest problems in sports vision: tracking a cricket ball moving at professional speeds.
 
 The system is built on:
 - YOLOv8 for real-time ball detection
 - SORT (Simple Online and Realtime Tracking) for maintaining ball identity
-- Trajectory plotting to visualize the ball’s movement across frames
+- Trajectory plotting to visualize the ball's movement across frames
 
 It achieves smooth real-time performance on consumer hardware, making it suitable for sports analytics, live broadcast overlays, and research in motion prediction.`,
-  "story":
-    "I built this project to push the limits of computer vision in sports. Cricket poses a unique challenge with motion blur, occlusion by players, and high-speed movement. After training a YOLOv8 model and integrating SORT, I achieved robust tracking and trajectory visualization.",
-  "impact": "Real-time cricket ball trajectory visualization with YOLOv8 and SORT",
-  "metrics": ["YOLOv8 detection", "SORT tracking", "Trajectory prediction", "Real-time visualization"],
-  "detailedMetrics": [
-    { "label": "FPS", "value": "25+", "description": "Processes video streams in real time" },
-    { "label": "Detection Model", "value": "YOLOv8", "description": "Optimized for cricket ball detection" },
-    { "label": "Tracking", "value": "SORT", "description": "Maintains identity across frames" },
-    { "label": "Trajectory", "value": "Plotted", "description": "Real-time trajectory visualization" }
-  ],
-  "tech": ["YOLOv8", "Python", "OpenCV", "PyTorch", "SORT"],
-  "features": [
-    "Real-time ball detection with YOLOv8",
-    "SORT-based object tracking",
-    "Trajectory prediction and plotting",
-    "Webcam and video file support",
-    "Modular code structure",
-    "Extendable for speed and 3D prediction"
-  ],
-  "challenges": [
-    "Handling motion blur at high speeds",
-    "Tracking through player occlusions",
-    "Maintaining accuracy on low-quality video",
-    "Balancing detection accuracy with real-time FPS"
-  ],
-  "github": "https://github.com/aditya-pandey-ai/Ball-Tracking-Trajectory",
-  "demo": "#",
-  "date": "2024",
-  "duration": "3 months",
-  "category": "Computer Vision",
-  "media": {
-    "type": "image",
-    "url": "/assets/trajectory-demo.gif",
-    "alt": "Cricket ball trajectory visualization in real-time video",
-    "caption": "Real-time cricket ball tracking with YOLOv8 detection and SORT trajectory visualization"
+    story:
+      "I built this project to push the limits of computer vision in sports. Cricket poses a unique challenge with motion blur, occlusion by players, and high-speed movement. After training a YOLOv8 model and integrating SORT, I achieved robust tracking and trajectory visualization.",
+    impact: "Real-time cricket ball trajectory visualization with YOLOv8 and SORT",
+    metrics: ["YOLOv8 detection", "SORT tracking", "Trajectory prediction", "Real-time visualization"],
+    detailedMetrics: [
+      { label: "FPS", value: "25+", description: "Processes video streams in real time" },
+      { label: "Detection Model", value: "YOLOv8", description: "Optimized for cricket ball detection" },
+      { label: "Tracking", value: "SORT", description: "Maintains identity across frames" },
+      { label: "Trajectory", value: "Plotted", description: "Real-time trajectory visualization" },
+    ],
+    tech: ["YOLOv8", "Python", "OpenCV", "PyTorch", "SORT"],
+    features: [
+      "Real-time ball detection with YOLOv8",
+      "SORT-based object tracking",
+      "Trajectory prediction and plotting",
+      "Webcam and video file support",
+      "Modular code structure",
+      "Extendable for speed and 3D prediction",
+    ],
+    challenges: [
+      "Handling motion blur at high speeds",
+      "Tracking through player occlusions",
+      "Maintaining accuracy on low-quality video",
+      "Balancing detection accuracy with real-time FPS",
+    ],
+    github: "https://github.com/aditya-pandey-ai/Ball-Tracking-Trajectory",
+    demo: "#",
+    date: "2024",
+    duration: "3 months",
+    category: "Computer Vision",
+    media: {
+      type: "gif",
+      url: "/assets/projects/cricket-ball-detection/trajectory-demo.gif",
+      alt: "Cricket ball trajectory visualization in real-time video",
+      caption: "Real-time cricket ball tracking with YOLOv8 detection and SORT trajectory visualization",
+    },
   },
-},
 
   {
     id: "elt-pipeline",
@@ -72,7 +72,7 @@ The system features automated data validation, error handling, and recovery mech
 
 Performance optimizations include parallel processing, incremental loading strategies, and intelligent caching mechanisms that reduced processing time by 95% compared to traditional batch processing approaches.`,
     story:
-      "I was studying for my Data Warehouse exam when it hit me—if I ever wanted to build a model that handles millions of data points, a simple API fetch or basic database just wouldn’t cut it. I’d need something production-grade. That’s when I thought, why not build a project around this and really learn the ins and outs of Data Engineering?",
+      "I was studying for my Data Warehouse exam when it hit me—if I ever wanted to build a model that handles millions of data points, a simple API fetch or basic database just wouldn't cut it. I’d need something production-grade. That’s when I thought, why not build a project around this and really learn the ins and outs of Data Engineering?",
     impact: "95% efficiency improvement",
     metrics: ["1M+ rows processed", "100% test coverage", "95% workload reduction", "Automated DAGs"],
     detailedMetrics: [
@@ -106,7 +106,7 @@ Performance optimizations include parallel processing, incremental loading strat
     category: "Data Engineering",
     media: {
       type: "image",
-      url: "/sales-forecasting-charts-and-graphs.jpg",
+      url: "/assets/projects/elt-pipeline/first.png",
       alt: "ELT pipeline architecture diagram showing data flow and processing stages",
       caption: "Comprehensive ELT pipeline architecture with real-time monitoring and automated data quality checks",
     },
@@ -159,18 +159,18 @@ The agent's decision-making process is transparent and explainable, providing de
     category: "AI Agents",
     media: {
       type: "image",
-      url: "/sentiment-analysis-visualization-with-word-clouds.jpg",
+      url: "/ai-marketing-dashboard-with-campaign-analytics.jpg",
       alt: "AI marketing agent dashboard showing campaign performance and automated decisions",
       caption: "AI marketing automation dashboard with real-time campaign optimization and performance analytics",
     },
   },
   {
-  "id": "neocypher",
-  "title": "NeoCypher",
-  "subtitle": "AI-Powered Multi-Database Query System",
-  "description":
-    "NeoCypher is an AI-powered natural language interface for querying and managing multiple databases with a single prompt. It supports SQL, NoSQL, and graph databases with visualization dashboards and full CRUD capabilities.",
-  "fullDescription": `NeoCypher bridges the gap between natural language and complex database systems. Instead of writing SQL, Cypher, or MongoDB queries, users can describe what they want in plain English and NeoCypher translates it into executable queries.
+    id: "neocypher",
+    title: "NeoCypher",
+    subtitle: "AI-Powered Multi-Database Query System",
+    description:
+      "NeoCypher is an AI-powered natural language interface for querying and managing multiple databases with a single prompt. It supports SQL, NoSQL, and graph databases with visualization dashboards and full CRUD capabilities.",
+    fullDescription: `NeoCypher bridges the gap between natural language and complex database systems. Instead of writing SQL, Cypher, or MongoDB queries, users can describe what they want in plain English and NeoCypher translates it into executable queries.
 
 It supports a wide range of databases:
 - SQL (MySQL, PostgreSQL, SQLite)
@@ -178,102 +178,102 @@ It supports a wide range of databases:
 - Graph databases (Neo4j)
 
 Beyond querying, NeoCypher enables CRUD operations and automatically generates interactive visualizations, making insights accessible even to non-technical users. The architecture is modular, with a pipeline that processes input → NLP → Query Parsing → Execution → Visualization.`,
-  "story":
-    "I wanted to make databases more accessible by removing the barrier of query languages. NeoCypher started as an experiment to map English prompts to SQL queries, but quickly grew into a full multi-database platform with visualization support.",
-  "impact": "Democratizing database access with AI",
-  "metrics": ["Multi-DB support", "CRUD operations", "Auto-visualization", "NLP-driven queries"],
-  "detailedMetrics": [
-    { "label": "Supported Databases", "value": "5", "description": "MySQL, PostgreSQL, SQLite, MongoDB, Neo4j" },
-    { "label": "Visualization", "value": "Auto", "description": "Interactive dashboards generated automatically" },
-    { "label": "NLP Parsing", "value": "Yes", "description": "Transforms English prompts into queries" },
-    { "label": "Architecture", "value": "Modular", "description": "Input → NLP → Query Parsing → Execution → Visualization" }
-  ],
-  "tech": ["Python", "Streamlit", "Neo4j", "SQLAlchemy", "PyMongo", "Plotly", "spaCy/OpenAI"],
-  "features": [
-    "Query databases using natural language",
-    "CRUD operations across SQL, NoSQL, and Graph DBs",
-    "Auto-generated interactive visualizations",
-    "Unified multi-database interface",
-    "Secure and extendable modular design"
-  ],
-  "challenges": [
-    "Mapping natural language to multiple query syntaxes",
-    "Supporting different database types seamlessly",
-    "Building an intuitive visualization pipeline",
-    "Ensuring performance across large datasets"
-  ],
-  "github": "https://github.com/aditya-pandey-ai/NeoCypher",
-  "demo": "#",
-  "date": "2024",
-  "duration": "5 months",
-  "category": "Database + AI",
-  "media": {
-    "type": "image",
-    "url": "/assets/demo.gif",
-    "alt": "NeoCypher interface showing natural language query results with visualization",
-    "caption": "Querying multiple databases with a single natural language prompt"
-  },
-},
-  {
-    id: "quanto",
-    title: "Quanto",
-    subtitle: "Quantitative Analysis Platform",
-    description:
-      "A comprehensive quantitative analysis platform that brings Wall Street-level analytics to everyday traders. Built with modern financial modeling techniques and real-time data processing to democratize quantitative trading strategies.",
-    fullDescription: `Quanto is a sophisticated quantitative analysis platform designed to democratize advanced financial analytics and trading strategies previously available only to institutional investors.
-
-The platform combines real-time market data processing with advanced statistical models, machine learning algorithms, and risk management systems. It provides retail traders and small investment firms with tools comparable to those used by major hedge funds and investment banks.
-
-Key features include automated strategy backtesting, real-time portfolio optimization, advanced risk metrics calculation, and market sentiment analysis. The system processes thousands of data points per second to provide actionable insights and trading signals.
-
-The platform's risk management system is particularly sophisticated, implementing multiple layers of protection including position sizing algorithms, correlation analysis, and dynamic hedging strategies that adapt to changing market conditions.`,
     story:
-      "Started as a personal project to understand market patterns, but evolved into a full platform when I realized how inaccessible quantitative finance tools were for individual investors. The real breakthrough was implementing risk management algorithms that actually work in volatile markets.",
-    impact: "Democratized quant trading",
-    metrics: ["Real-time analysis", "Risk management", "Strategy backtesting", "Market insights"],
+      "I wanted to make databases more accessible by removing the barrier of query languages. NeoCypher started as an experiment to map English prompts to SQL queries, but quickly grew into a full multi-database platform with visualization support.",
+    impact: "Democratizing database access with AI",
+    metrics: ["Multi-DB support", "CRUD operations", "Auto-visualization", "NLP-driven queries"],
     detailedMetrics: [
-      { label: "Data Processing", value: "10K+", description: "Market data points per second" },
-      { label: "Strategy Accuracy", value: "78%", description: "Backtesting prediction accuracy" },
-      { label: "Risk Reduction", value: "45%", description: "Portfolio volatility decrease" },
-      { label: "Processing Speed", value: "<100ms", description: "Real-time analysis latency" },
-      { label: "Market Coverage", value: "50+", description: "Financial instruments supported" },
-      { label: "User ROI", value: "35%", description: "Average user return improvement" },
+      { label: "Supported Databases", value: "5", description: "MySQL, PostgreSQL, SQLite, MongoDB, Neo4j" },
+      { label: "Visualization", value: "Auto", description: "Interactive dashboards generated automatically" },
+      { label: "NLP Parsing", value: "Yes", description: "Transforms English prompts into queries" },
+      {
+        label: "Architecture",
+        value: "Modular",
+        description: "Input → NLP → Query Parsing → Execution → Visualization",
+      },
     ],
-    tech: ["Python", "Financial APIs", "Statistics", "Machine Learning", "NumPy", "Pandas"],
+    tech: ["Python", "Streamlit", "Neo4j", "SQLAlchemy", "PyMongo", "Plotly", "spaCy/OpenAI"],
     features: [
-      "Real-time market data analysis",
-      "Advanced backtesting engine",
-      "Portfolio optimization algorithms",
-      "Risk management systems",
-      "Market sentiment analysis",
-      "Automated trading signals",
+      "Query databases using natural language",
+      "CRUD operations across SQL, NoSQL, and Graph DBs",
+      "Auto-generated interactive visualizations",
+      "Unified multi-database interface",
+      "Secure and extendable modular design",
     ],
     challenges: [
-      "Handling real-time financial data at scale",
-      "Implementing robust risk management",
-      "Ensuring regulatory compliance",
-      "Managing market volatility in algorithms",
-      "Creating intuitive interfaces for complex analytics",
+      "Mapping natural language to multiple query syntaxes",
+      "Supporting different database types seamlessly",
+      "Building an intuitive visualization pipeline",
+      "Ensuring performance across large datasets",
     ],
-    github: "https://github.com/aditya-pandey-ai/Quanto",
+    github: "https://github.com/aditya-pandey-ai/NeoCypher",
     demo: "#",
     date: "2024",
-    duration: "6 months",
-    category: "FinTech",
+    duration: "5 months",
+    category: "Database + AI",
     media: {
-      type: "image",
-      url: "/data-dashboard-charts.png",
-      alt: "Quanto quantitative analysis dashboard with real-time market data and trading signals",
-      caption: "Advanced quantitative analysis platform with real-time market data processing and risk management",
+      type: "gif",
+      url: "/assets/projects/neocypher/demo.gif",
+      alt: "NeoCypher interface showing natural language query results with visualization",
+      caption: "Querying multiple databases with a single natural language prompt",
     },
   },
-{
-  "id": "network-security",
-  "title": "EdgeNodes",
-  "subtitle": "Phishing Detection & Network Security System",
-  "description":
-    "EdgeNodes is a machine learning-based phishing detection system that secures edge networks from malicious websites. It integrates a full MLOps pipeline with AWS deployment for real-time inference.",
-  "fullDescription": `EdgeNodes is an AI-powered cybersecurity platform designed to detect and prevent phishing attacks in real-time.  
+  {
+    id: "mclaren-f1-dashboard",
+    title: "McLaren F1 Dashboard",
+    subtitle: "Formula 1 Telemetry & Analytics",
+    description:
+      "An interactive dashboard that visualizes McLaren Formula 1 race telemetry and performance metrics using FastF1 and Streamlit. Provides real-time insights into lap times, sector speeds, tire strategies, and race analytics.",
+    fullDescription: `The McLaren F1 Dashboard is a data visualization platform built to analyze and explore Formula 1 race telemetry with a focus on McLaren drivers. 
+
+It integrates the FastF1 library to fetch real race weekend data and transforms it into interactive, insightful visualizations. The dashboard allows fans, analysts, and engineers to study lap performance, speed traces, pit stop strategies, and driver comparisons in an intuitive way.
+
+By leveraging Python, Pandas, Plotly, and Streamlit, the dashboard delivers a clean and responsive interface, making complex F1 telemetry data accessible to a wider audience.`,
+    story:
+      "Started as an exploration into Formula 1 telemetry with FastF1, the project evolved into a full analytics dashboard to study McLaren's race performance in detail. The main challenge was transforming raw telemetry into meaningful and interactive visuals for real-time insights.",
+    impact: "Made F1 telemetry data accessible and engaging for fans, students, and analysts.",
+    metrics: ["Telemetry visualization", "Lap time analysis", "Driver comparisons", "Pit stop insights"],
+    detailedMetrics: [
+      { label: "Data Sources", value: "FastF1", description: "Official F1 race weekend telemetry" },
+      { label: "Visualization", value: "10+", description: "Interactive charts and graphs" },
+      { label: "Driver Comparison", value: "Yes", description: "Side-by-side lap and speed analysis" },
+      { label: "Strategy Insights", value: "Yes", description: "Tire and pit stop strategy breakdowns" },
+      { label: "Real-time Mode", value: "Supported", description: "Live telemetry data fetching" },
+    ],
+    tech: ["Python", "FastF1", "Pandas", "Plotly", "Streamlit"],
+    features: [
+      "Lap time and sector speed visualization",
+      "Driver vs. driver performance comparison",
+      "Pit stop and tire strategy breakdowns",
+      "Speed traces and telemetry overlays",
+      "Interactive Streamlit dashboard",
+    ],
+    challenges: [
+      "Processing large race telemetry datasets",
+      "Synchronizing driver data for fair comparisons",
+      "Building intuitive visualizations for complex racing metrics",
+      "Ensuring real-time responsiveness of the dashboard",
+    ],
+    github: "https://github.com/aditya-pandey-ai/mclaren-f1-dashboard",
+    demo: "#",
+    date: "2024",
+    duration: "2 months",
+    category: "Data Visualization / Sports Analytics",
+    media: {
+      type: "image",
+      url: "/assets/projects/mclaren-f1-dashboard/dashboard-screenshot.png",
+      alt: "McLaren F1 telemetry dashboard with lap time, speed trace, and pit strategy visualizations",
+      caption: "Interactive dashboard analyzing McLaren F1 race telemetry and performance metrics",
+    },
+  },
+
+  {
+    id: "network-security",
+    title: "EdgeNodes",
+    subtitle: "Phishing Detection & Network Security System",
+    description:
+      "EdgeNodes is a machine learning-based phishing detection system that secures edge networks from malicious websites. It integrates a full MLOps pipeline with AWS deployment for real-time inference.",
+    fullDescription: `EdgeNodes is an AI-powered cybersecurity platform designed to detect and prevent phishing attacks in real-time.  
 It leverages machine learning models trained on URL and website behavior features to classify sites as legitimate or malicious.
 
 The project implements a complete MLOps pipeline:
@@ -284,44 +284,175 @@ The project implements a complete MLOps pipeline:
 - Artifact management for reproducibility and monitoring
 
 By combining robust ML algorithms with cloud-native deployment, EdgeNodes ensures scalable, reliable, and adaptive protection for modern networks.`,
-  "story":
-    "I wanted to address the growing issue of phishing threats by building an end-to-end ML security system. EdgeNodes evolved into a full MLOps-driven platform with AWS integration for real-time protection.",
-  "impact": "AI-powered phishing detection for network security",
-  "metrics": ["MLOps pipeline", "MLflow tracking", "AWS deployment", "High model accuracy"],
-  "detailedMetrics": [
-    { "label": "Dataset Size", "value": "11,055", "description": "Samples with 30 URL/website features" },
-    { "label": "Best Model", "value": "RandomForestClassifier", "description": "Selected for accuracy and recall" },
-    { "label": "Train F1-score", "value": "0.9910", "description": "Strong performance on training data" },
-    { "label": "Test F1-score", "value": "0.9776", "description": "High generalization on unseen data" },
-    { "label": "Test Recall", "value": "0.9836", "description": "Effective at catching phishing attempts" }
-  ],
-  "tech": ["Python", "scikit-learn", "MLflow", "AWS (S3, ECR, EC2)", "Docker", "MLOps"],
-  "features": [
-    "Automated data pipeline with validation and transformation",
-    "ML-based phishing website classification",
-    "Experiment tracking and versioning with MLflow",
-    "Model deployment to AWS for real-time inference",
-    "Artifacts management for reproducibility",
-    "Scalable, modular MLOps architecture"
-  ],
-  "challenges": [
-    "Building a robust pipeline for end-to-end ML lifecycle",
-    "Balancing precision and recall to minimize false positives",
-    "Integrating MLflow for tracking and deployment",
-    "Scaling deployments on AWS for real-time inference"
-  ],
-  "github": "https://github.com/aditya-pandey-ai/Network-Security",
-  "demo": "#",
-  "date": "2024",
-  "duration": "4 months",
-  "category": "Cybersecurity & MLOps",
-  "media": {
-    "type": "image",
-    "url": "/assets/edgenodes-architecture.png",
-    "alt": "EdgeNodes architecture showing MLOps pipeline and AWS deployment",
-    "caption": "End-to-end phishing detection pipeline with MLflow tracking and AWS cloud deployment"
-  }
-}
+    story:
+      "I wanted to address the growing issue of phishing threats by building an end-to-end ML security system. EdgeNodes evolved into a full MLOps-driven platform with AWS integration for real-time protection.",
+    impact: "AI-powered phishing detection for network security",
+    metrics: ["MLOps pipeline", "MLflow tracking", "AWS deployment", "High model accuracy"],
+    detailedMetrics: [
+      { label: "Dataset Size", value: "11,055", description: "Samples with 30 URL/website features" },
+      { label: "Best Model", value: "RandomForestClassifier", description: "Selected for accuracy and recall" },
+      { label: "Train F1-score", value: "0.9910", description: "Strong performance on training data" },
+      { label: "Test F1-score", value: "0.9776", description: "High generalization on unseen data" },
+      { label: "Test Recall", value: "0.9836", description: "Effective at catching phishing attempts" },
+    ],
+    tech: ["Python", "scikit-learn", "MLflow", "AWS (S3, ECR, EC2)", "Docker", "MLOps"],
+    features: [
+      "Automated data pipeline with validation and transformation",
+      "ML-based phishing website classification",
+      "Experiment tracking and versioning with MLflow",
+      "Model deployment to AWS for real-time inference",
+      "Artifacts management for reproducibility",
+      "Scalable, modular MLOps architecture",
+    ],
+    challenges: [
+      "Building a robust pipeline for end-to-end ML lifecycle",
+      "Balancing precision and recall to minimize false positives",
+      "Integrating MLflow for tracking and deployment",
+      "Scaling deployments on AWS for real-time inference",
+    ],
+    github: "https://github.com/aditya-pandey-ai/Network-Security",
+    demo: "#",
+    date: "2024",
+    duration: "4 months",
+    category: "Cybersecurity & MLOps",
+    media: {
+      type: "image",
+      url: "/assets/projects/edgenodes/architecture.png",
+      alt: "EdgeNodes architecture showing MLOps pipeline and AWS deployment",
+      caption: "End-to-end phishing detection pipeline with MLflow tracking and AWS cloud deployment",
+    },
+  },
+  {
+    id: "customer-churn-prediction",
+    title: "Customer Churn Prediction",
+    subtitle: "Machine Learning & Business Analytics",
+    description:
+      "A comprehensive machine learning solution that predicts customer churn using advanced analytics and feature engineering. Built to help businesses identify at-risk customers and implement retention strategies before it's too late.",
+    fullDescription: `Customer churn prediction is critical for business sustainability, as acquiring new customers costs 5-25 times more than retaining existing ones. This project implements a complete machine learning pipeline to predict customer churn with high accuracy.
+
+The system analyzes customer behavior patterns, transaction history, engagement metrics, and demographic data to identify customers likely to churn. It uses advanced feature engineering techniques to extract meaningful insights from raw data and applies multiple machine learning algorithms to achieve optimal prediction performance.
+
+Key components include:
+- Comprehensive data preprocessing and feature engineering
+- Multiple ML algorithms comparison (Random Forest, XGBoost, SVM, Neural Networks)
+- Advanced model evaluation with cross-validation and performance metrics
+- Feature importance analysis to understand churn drivers
+- Business-ready insights and actionable recommendations
+
+The solution provides businesses with early warning systems and actionable insights to implement targeted retention strategies, ultimately reducing churn rates and increasing customer lifetime value.`,
+    story:
+      "Customer retention costs 5x less than acquisition, but most companies only realize a customer is leaving after they're gone. I built this predictive system to give businesses a crystal ball into customer behavior, using historical data to predict future churn with high accuracy.",
+    impact: "Proactive customer retention through predictive analytics",
+    metrics: ["High prediction accuracy", "Feature importance analysis", "Business insights", "Retention strategies"],
+    detailedMetrics: [
+      { label: "Model Accuracy", value: "92%", description: "Overall prediction accuracy on test data" },
+      { label: "Precision", value: "89%", description: "Accuracy of positive churn predictions" },
+      { label: "Recall", value: "94%", description: "Percentage of actual churners identified" },
+      { label: "F1-Score", value: "91%", description: "Balanced performance metric" },
+      { label: "ROC-AUC", value: "0.96", description: "Model's discriminative ability" },
+      { label: "Features Analyzed", value: "25+", description: "Customer behavior and demographic features" },
+    ],
+    tech: ["Python", "Scikit-learn", "Pandas", "Matplotlib", "Seaborn", "XGBoost", "Feature Engineering"],
+    features: [
+      "Advanced feature engineering and selection",
+      "Multiple ML algorithm comparison and optimization",
+      "Comprehensive model evaluation and validation",
+      "Feature importance analysis and interpretation",
+      "Business insights and actionable recommendations",
+      "Scalable prediction pipeline for real-time inference",
+    ],
+    challenges: [
+      "Handling imbalanced dataset with proper sampling techniques",
+      "Feature engineering from complex customer behavior data",
+      "Selecting optimal model while avoiding overfitting",
+      "Translating model predictions into business actionable insights",
+      "Ensuring model interpretability for business stakeholders",
+    ],
+    github: "https://github.com/aditya-pandey-ai/Customer-Churn-Prediction",
+    demo: "#",
+    date: "2024",
+    duration: "3 months",
+    category: "Machine Learning & Business Analytics",
+    media: {
+      type: "image",
+      url: "/customer-churn-prediction-dashboard-with-analytics.jpg",
+      alt: "Customer churn prediction dashboard showing model performance and feature importance",
+      caption: "Comprehensive churn prediction analytics with model performance metrics and business insights",
+    },
+  },
+  {
+    id: "student-grade-predictor",
+    title: "Student Grade Predictor",
+    subtitle: "Educational Analytics & Machine Learning",
+    description:
+      "An intelligent system that predicts student academic performance using machine learning algorithms. Analyzes study patterns, attendance, and demographic factors to forecast grades and identify students who need additional support.",
+    fullDescription: `The Student Grade Predictor leverages machine learning to transform educational data into actionable insights for improving student outcomes. By analyzing multiple factors that influence academic performance, the system provides early warning signals for students at risk of poor performance.
+
+The system processes various data sources:
+- Academic history and previous performance
+- Attendance patterns and engagement metrics
+- Study habits and time allocation
+- Demographic and socioeconomic factors
+- Extracurricular activities and social factors
+
+Using advanced machine learning techniques, the predictor identifies complex patterns and relationships that human analysis might miss. The system provides not just predictions, but explanations of the key factors influencing each student's projected performance.
+
+Key features include:
+- Multi-factor analysis of student performance drivers
+- Early intervention recommendations for at-risk students
+- Personalized learning path suggestions
+- Performance trend analysis and forecasting
+- Comprehensive reporting for educators and administrators
+
+The solution empowers educators to make data-driven decisions, implement timely interventions, and personalize learning experiences to maximize student success.`,
+    story:
+      "Education should be personalized, but teachers often lack the tools to identify struggling students early. This predictor analyzes multiple factors—from study time to family background—to forecast academic performance and enable timely interventions.",
+    impact: "Early intervention system for student academic success",
+    metrics: ["Performance prediction", "Risk identification", "Educational insights", "Intervention recommendations"],
+    detailedMetrics: [
+      { label: "Prediction Accuracy", value: "88%", description: "Accuracy in predicting final grades" },
+      { label: "Early Detection", value: "85%", description: "Success rate in identifying at-risk students" },
+      { label: "Features Analyzed", value: "20+", description: "Academic, behavioral, and demographic factors" },
+      { label: "Intervention Success", value: "73%", description: "Improvement rate after recommended interventions" },
+      { label: "Model Interpretability", value: "High", description: "Clear explanations of prediction factors" },
+      { label: "Processing Speed", value: "<2s", description: "Real-time prediction generation" },
+    ],
+    tech: [
+      "Python",
+      "Machine Learning",
+      "Pandas",
+      "Scikit-learn",
+      "Data Visualization",
+      "Statistical Modeling",
+      "Feature Engineering",
+    ],
+    features: [
+      "Multi-dimensional student performance analysis",
+      "Early warning system for academic risk identification",
+      "Personalized intervention recommendations",
+      "Comprehensive performance trend analysis",
+      "Interactive dashboards for educators",
+      "Automated reporting and insights generation",
+    ],
+    challenges: [
+      "Handling sensitive student data with privacy considerations",
+      "Balancing multiple performance factors with varying importance",
+      "Creating interpretable models for educational stakeholders",
+      "Ensuring fairness and avoiding bias in predictions",
+      "Integrating diverse data sources and formats",
+    ],
+    github: "https://github.com/aditya-pandey-ai/Student-Grade-Predictor",
+    demo: "#",
+    date: "2024",
+    duration: "3 months",
+    category: "Educational Analytics & Machine Learning",
+    media: {
+      type: "image",
+      url: "/student-grade-prediction-dashboard-with-performanc.jpg",
+      alt: "Student grade predictor dashboard showing performance analytics and risk assessment",
+      caption: "Educational analytics dashboard with grade predictions and student performance insights",
+    },
+  },
 ]
 export default function ProjectDetail() {
   const params = useParams()

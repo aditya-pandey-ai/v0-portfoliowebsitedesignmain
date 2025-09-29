@@ -1,0 +1,9 @@
+# This folder is for project media files
+# Upload images, videos, and other media assets for your projects here
+# 
+# Recommended structure:
+# /assets/projects/project-name/
+#   - screenshots/
+#   - videos/
+#   - demos/
+#   - documentation/

@@ -1,90 +1,13 @@
 "use client"
 
 import React from "react"
-
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { Github, Linkedin, Mail, ExternalLink, Download, Award, TrendingUp, Users, Code } from "lucide-react"
-import { useEffect, useState } from "react"
-import Link from "next/link"
-
-const PlayStationX = () => <img src="/playstation-x.svg" alt="PlayStation X" className="w-12 h-12" />
-
-const PlayStationTriangle = () => (
-  <img src="/playstation-triangle.svg" alt="PlayStation Triangle" className="w-12 h-12" />
-)
-
-const F1Logo = () => <img src="/f1-logo.svg" alt="F1 Logo" className="w-16 h-12" />
-
-const LeMansLogo = () => <img src="/le-mans-logo.svg" alt="Le Mans Logo" className="w-16 h-12" />
-
-const LeMansClassic = () => <img src="/le-mans-classic.svg" alt="Le Mans Classic" className="w-16 h-12" />
-
-const MotoGPLogo = () => <img src="/motogp-logo.svg" alt="MotoGP Logo" className="w-16 h-12" />
-
-const SF = () => <img src="/sf.svg" alt="SF Logo" className="w-16 h-12" />
-
-const WEC = () => <img src="/WEC_Logo.svg" alt="WEC Logo" className="w-16 h-12" />
-
-const AnimatedFloatingIcon = ({ Component, index }: { Component: React.ComponentType; index: number }) => {
-  const [position, setPosition] = useState({
-    x: Math.random() * 90 + 5,
-    y: Math.random() * 90 + 5,
-  })
-  const [direction, setDirection] = useState({
-    x: (Math.random() - 0.5) * 0.5,
-    y: (Math.random() - 0.5) * 0.5,
-  })
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setPosition((prev) => {
-        let newX = prev.x + direction.x
-        let newY = prev.y + direction.y
-
-        // Bounce off edges
-        if (newX <= 0 || newX >= 95) {
-          setDirection((d) => ({ ...d, x: -d.x }))
-          newX = Math.max(0, Math.min(95, newX))
-        }
-        if (newY <= 0 || newY >= 95) {
-          setDirection((d) => ({ ...d, y: -d.y }))
-          newY = Math.max(0, Math.min(95, newY))
-        }
-
-        return { x: newX, y: newY }
-      })
-    }, 100)
-
-    // Change direction randomly every 3-8 seconds
-    const directionInterval = setInterval(
-      () => {
-        setDirection({
-          x: (Math.random() - 0.5) * 0.8,
-          y: (Math.random() - 0.5) * 0.8,
-        })
-      },
-      Math.random() * 5000 + 3000,
-    )
-
-    return () => {
-      clearInterval(interval)
-      clearInterval(directionInterval)
-    }
-  }, [direction.x, direction.y])
-
-  return (
-    <div
-      className="absolute text-stone-500 transition-all duration-100 ease-linear"
-      style={{
-        left: `${position.x}%`,
-        top: `${position.y}%`,
-        transform: `rotate(${Math.sin(Date.now() * 0.001 + index) * 10}deg)`,
-      }}
-    >
-      <Component />
-    </div>
-  )
-}
+import { Github, Linkedin, Mail, Download, Award, TrendingUp, Users, Code } from "lucide-react"
+import { BentoCard, BentoGrid } from "@/components/ui/bento-grid"
+import { Menu, MenuItem, ProductItem, HoveredLink } from "@/components/ui/navbar-menu"
+import { BackgroundPaths } from "@/components/ui/background-paths"
+import { RocketIcon, CodeIcon, DatabaseIcon, LightningBoltIcon, TargetIcon } from "@radix-ui/react-icons"
 
 const AnimatedName = () => {
   const [isHovered, setIsHovered] = useState(false)
@@ -176,6 +99,79 @@ const AnimatedName = () => {
   )
 }
 
+function Navbar({ className }: { className?: string }) {
+  const [active, setActive] = useState<string | null>(null)
+
+  const featuredProjects = [
+    {
+      title: "NeoCypher",
+      description: "Graph Database & AI Project with Neo4j integration",
+      href: "/projects/neocypher",
+      src: "/graph-database-visualization.jpg",
+    },
+    {
+      title: "EdgeNodes",
+      description: "Cybersecurity MLOps pipeline with AWS deployment",
+      href: "/projects/network-security",
+      src: "/cybersecurity-dashboard.png",
+    },
+    {
+      title: "Cricket Ball Detection",
+      description: "Real-time computer vision with 86% precision",
+      href: "/projects/cricket-ball-detection",
+      src: "/cricket-ball-tracking.jpg",
+    },
+    {
+      title: "AI Marketing Agent",
+      description: "Autonomous agent with 40% performance boost",
+      href: "/projects/ai-marketing-agent",
+      src: "/ai-marketing-automation.jpg",
+    },
+  ]
+
+  return (
+    <div className={`fixed top-10 inset-x-0 max-w-4xl mx-auto z-50 ${className}`}>
+      <Menu setActive={setActive}>
+        <MenuItem setActive={setActive} active={active} item="About">
+          <div className="flex flex-col space-y-4 text-sm">
+            <HoveredLink href="#hero">Profile</HoveredLink>
+            <HoveredLink href="#skills">Technical Skills</HoveredLink>
+            <HoveredLink href="#contact">Certifications</HoveredLink>
+          </div>
+        </MenuItem>
+        <MenuItem setActive={setActive} active={active} item="Projects">
+          <div className="text-sm grid grid-cols-2 gap-10 p-4">
+            {featuredProjects.map((project) => (
+              <ProductItem
+                key={project.title}
+                title={project.title}
+                href={project.href}
+                src={project.src}
+                description={project.description}
+              />
+            ))}
+          </div>
+        </MenuItem>
+        <MenuItem setActive={setActive} active={active} item="Skills">
+          <div className="flex flex-col space-y-4 text-sm">
+            <HoveredLink href="#skills">Machine Learning</HoveredLink>
+            <HoveredLink href="#skills">Data Engineering</HoveredLink>
+            <HoveredLink href="#skills">AI Frameworks</HoveredLink>
+            <HoveredLink href="#skills">Certifications</HoveredLink>
+          </div>
+        </MenuItem>
+        <MenuItem setActive={setActive} active={active} item="Contact">
+          <div className="flex flex-col space-y-4 text-sm">
+            <HoveredLink href="mailto:pandey.aditya2304@gmail.com">Email</HoveredLink>
+            <HoveredLink href="https://linkedin.com/in/ap2304">LinkedIn</HoveredLink>
+            <HoveredLink href="https://github.com/aditya-pandey-ai">GitHub</HoveredLink>
+          </div>
+        </MenuItem>
+      </Menu>
+    </div>
+  )
+}
+
 export default function Portfolio() {
   const [scrollY, setScrollY] = useState(0)
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set())
@@ -215,103 +211,73 @@ export default function Portfolio() {
     }
   }
 
-  const floatingIcons = [
-    { Component: PlayStationX, id: 1 },
-    { Component: PlayStationTriangle, id: 2 },
-    { Component: F1Logo, id: 3 },
-    { Component: LeMansLogo, id: 4 },
-    { Component: LeMansClassic, id: 5 },
-    { Component: MotoGPLogo, id: 6 },
-    { Component: SF, id: 7 },
-    { Component: WEC, id: 8 },
+  const bentoProjects = [
+    {
+      Icon: LightningBoltIcon,
+      name: "NeoCypher",
+      description: "Graph Database & AI Project with Neo4j integration and custom algorithms",
+      href: "/projects/neocypher",
+      cta: "Explore Graph AI",
+      background: (
+        <div className="absolute -right-20 -top-20 opacity-20">
+          <div className="w-40 h-40 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full blur-3xl" />
+        </div>
+      ),
+      className: "lg:row-start-1 lg:row-end-4 lg:col-start-2 lg:col-end-3",
+    },
+    {
+      Icon: TargetIcon,
+      name: "EdgeNodes Security",
+      description: "MLOps-powered phishing detection with AWS cloud deployment",
+      href: "/projects/network-security",
+      cta: "View Security AI",
+      background: (
+        <div className="absolute -right-20 -top-20 opacity-20">
+          <div className="w-40 h-40 bg-gradient-to-br from-red-500 to-orange-600 rounded-full blur-3xl" />
+        </div>
+      ),
+      className: "lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-3",
+    },
+    {
+      Icon: RocketIcon,
+      name: "Cricket Ball Tracking",
+      description: "Real-time computer vision with 86% precision using YOLOv8",
+      href: "/projects/cricket-ball-detection",
+      cta: "See CV in Action",
+      background: (
+        <div className="absolute -right-20 -top-20 opacity-20">
+          <div className="w-40 h-40 bg-gradient-to-br from-green-500 to-teal-600 rounded-full blur-3xl" />
+        </div>
+      ),
+      className: "lg:col-start-1 lg:col-end-2 lg:row-start-3 lg:row-end-4",
+    },
+    {
+      Icon: DatabaseIcon,
+      name: "ELT Pipeline",
+      description: "End-to-end data pipeline processing 1M+ rows with Snowflake & DBT",
+      href: "/projects/elt-pipeline",
+      cta: "Explore Pipeline",
+      background: (
+        <div className="absolute -right-20 -top-20 opacity-20">
+          <div className="w-40 h-40 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-full blur-3xl" />
+        </div>
+      ),
+      className: "lg:col-start-3 lg:col-end-3 lg:row-start-1 lg:row-end-2",
+    },
+    {
+      Icon: CodeIcon,
+      name: "AI Marketing Agent",
+      description: "Autonomous agent achieving 40% performance optimization in real-time",
+      href: "/projects/ai-marketing-agent",
+      cta: "See AI Agent",
+      background: (
+        <div className="absolute -right-20 -top-20 opacity-20">
+          <div className="w-40 h-40 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full blur-3xl" />
+        </div>
+      ),
+      className: "lg:col-start-3 lg:col-end-3 lg:row-start-2 lg:row-end-4",
+    },
   ]
-
-  const projects = [
-    {
-      id: "cricket-ball-detection",
-      title: "Real-Time Cricket Ball Detection & Tracking",
-      subtitle: "Computer Vision Project",
-      description:
-        "Ever wondered how to track a cricket ball moving at 150+ km/h? I did too. After weeks of experimenting with different detection models, I finally cracked it using YOLOv8. The real challenge wasn't just detection—it was maintaining accuracy when the ball gets occluded by players or goes out of frame.",
-      story:
-        "The breakthrough came at 2 AM when I realized the issue wasn't my model, but my training data. I spent the next week manually annotating 5000 images, focusing on edge cases like partial occlusions and motion blur. The result? A system that could track balls in real-time with 86% precision.",
-      impact: "86% precision achieved",
-      metrics: ["86% precision", "63% recall", "68% mAP50(B)", "25+ FPS tracking"],
-      tech: ["YOLOv8", "OpenCV", "SORT", "Python"],
-      github: "https://github.com/aditya-pandey-ai",
-      demo: "#",
-    },
-    {
-      id: "elt-pipeline",
-      title: "End-to-End ELT Pipeline for TPCH Dataset",
-      subtitle: "Data Engineering Project",
-      description:
-        "Building a data pipeline sounds straightforward until you're dealing with 1M+ rows and everything breaks. This project taught me that data engineering is 20% coding and 80% debugging why your pipeline failed at 3 AM. I learned to love (and hate) Apache Airflow in equal measure.",
-      story:
-        "The most frustrating part? Spending three days debugging what turned out to be a simple timezone issue in Airflow. But that failure led me to implement comprehensive logging and monitoring, which caught dozens of edge cases I never would have found otherwise.",
-      impact: "95% efficiency improvement",
-      metrics: ["1M+ rows processed", "100% test coverage", "95% workload reduction", "Automated DAGs"],
-      tech: ["Snowflake", "DBT", "Apache Airflow", "SQL"],
-      github: "https://github.com/aditya-pandey-ai",
-      demo: "#",
-    },
-    {
-      id: "ai-marketing-agent",
-      title: "AI Marketing Automation Agent",
-      subtitle: "Agentic AI System",
-      description:
-        "What if an AI could manage marketing campaigns better than humans? I built an autonomous agent that makes real-time decisions about budget allocation and campaign optimization. The scary part? It actually works better than manual management, making decisions in milliseconds that would take humans hours.",
-      story:
-        "The 'aha' moment came when I watched the agent pause a underperforming campaign and reallocate budget to a high-performer—all while I was sleeping. It had analyzed performance patterns I completely missed and made the optimal decision autonomously.",
-      impact: "40% performance boost",
-      metrics: ["40% optimization", "100+ daily campaigns", "AI-powered insights", "Real-time analysis"],
-      tech: ["LangChain", "Streamlit", "Python", "AI Agents"],
-      github: "https://github.com/aditya-pandey-ai",
-      demo: "#",
-    },
-    {
-      id: "neocypher",
-      title: "NeoCypher",
-      subtitle: "Graph Database & AI Project",
-      description:
-        "A sophisticated graph database implementation that leverages Neo4j's power with modern AI capabilities. This project explores the intersection of graph theory and machine learning, creating intelligent data relationships that traditional databases can't handle.",
-      story:
-        "The challenge was making graph databases accessible to developers who think in relational terms. After building custom query optimizers and visualization tools, I created a system that makes complex graph operations feel intuitive.",
-      impact: "Graph-powered insights",
-      metrics: ["Neo4j integration", "Custom algorithms", "AI-enhanced queries", "Visual analytics"],
-      tech: ["Neo4j", "Python", "Graph Theory", "AI"],
-      github: "https://github.com/aditya-pandey-ai/NeoCypher",
-      demo: "#",
-    },
-    {
-      id: "quanto",
-      title: "Quanto",
-      subtitle: "Quantitative Analysis Platform",
-      description:
-        "A comprehensive quantitative analysis platform that brings Wall Street-level analytics to everyday traders. Built with modern financial modeling techniques and real-time data processing to democratize quantitative trading strategies.",
-      story:
-        "Started as a personal project to understand market patterns, but evolved into a full platform when I realized how inaccessible quantitative finance tools were for individual investors. The real breakthrough was implementing risk management algorithms that actually work in volatile markets.",
-      impact: "Democratized quant trading",
-      metrics: ["Real-time analysis", "Risk management", "Strategy backtesting", "Market insights"],
-      tech: ["Python", "Financial APIs", "Statistics", "Machine Learning"],
-      github: "https://github.com/aditya-pandey-ai/Quanto",
-      demo: "#",
-    },
-    {
-      id: "network-security",
-      title: "EdgeNodes",
-      subtitle: "Cybersecurity & MLOps Project",
-      description:
-        "EdgeNodes is a phishing detection system powered by machine learning, designed with a full MLOps pipeline and AWS cloud deployment for real-time security.",
-      story:
-        "I built EdgeNodes to tackle the growing issue of phishing websites. What started as a simple classifier turned into a complete MLOps-driven system with automated pipelines, experiment tracking, and cloud deployment.",
-      impact: "End-to-end AI security pipeline",
-      metrics: ["End-to-end MLOps pipeline","AWS cloud deployment","MLflow tracking","High accuracy classification"],
-      tech: ["Python", "scikit-learn", "MLflow", "AWS (S3, ECR, EC2)", "Docker", "MLOps"],
-      github: "https://github.com/aditya-pandey-ai/Network-Security",
-      demo: "#"
-},
-]
 
   const achievements = [
     { metric: "3", label: "Major Projects Completed", icon: <Award className="w-6 h-6" /> },
@@ -337,47 +303,7 @@ export default function Portfolio() {
         />
       </div>
 
-      <div className="fixed inset-0 opacity-30 pointer-events-none overflow-hidden">
-        {floatingIcons.map((icon, index) => (
-          <AnimatedFloatingIcon key={icon.id} Component={icon.Component} index={index} />
-        ))}
-      </div>
-
-      <header className="fixed top-0 left-0 right-0 z-50 bg-stone-50/95 backdrop-blur-md border-b-4 border-stone-600">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            <AnimatedName />
-            <div className="flex items-center space-x-8">
-              <nav className="flex space-x-8 text-sm font-medium uppercase tracking-wide font-sans">
-                <button
-                  onClick={() => scrollToSection("hero")}
-                  className="transition-all duration-300 hover:scale-105 cursor-pointer hover:text-stone-500 text-stone-700"
-                >
-                  About
-                </button>
-                <button
-                  onClick={() => scrollToSection("projects")}
-                  className="transition-all duration-300 hover:scale-105 cursor-pointer hover:text-stone-500 text-stone-700"
-                >
-                  Projects
-                </button>
-                <button
-                  onClick={() => scrollToSection("skills")}
-                  className="transition-all duration-300 hover:scale-105 cursor-pointer hover:text-stone-500 text-stone-700"
-                >
-                  Skills
-                </button>
-                <button
-                  onClick={() => scrollToSection("contact")}
-                  className="transition-all duration-300 hover:scale-105 cursor-pointer hover:text-stone-500 text-stone-700"
-                >
-                  Contact
-                </button>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Navbar />
 
       <section
         id="hero"
@@ -388,7 +314,6 @@ export default function Portfolio() {
           transform: `translateY(${scrollY * 0.1}px)`,
         }}
       >
-        <div className="absolute inset-0 opacity-8 bg-gradient-to-br from-transparent via-stone-300 to-transparent"></div>
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
@@ -424,7 +349,8 @@ export default function Portfolio() {
               <div className="space-y-6">
                 <div className="border-l-4 border-stone-500 pl-6">
                   <p className="text-lg text-stone-600 italic leading-relaxed font-sans">
-                    "I don't just build AI models—I craft intelligent systems that think, learn, and solve real problems. Every line of code is a step toward making machines truly understand our world."
+                    "I don't just build AI models—I craft intelligent systems that think, learn, and solve real
+                    problems. Every line of code is a step toward making machines truly understand our world."
                   </p>
                 </div>
 
@@ -448,8 +374,18 @@ export default function Portfolio() {
                       <Linkedin className="w-5 h-5" />
                     </a>
                     <a
-                      href="mailto:pandey.aditya2304@gmail.com"
+                      href="mailto:pandey.aditya2304@gmail.com?subject=Hello%20Aditya&body=Hi%20Aditya,%0A%0AI%20found%20your%20portfolio%20and%20would%20like%20to%20connect."
                       className="p-2 border border-stone-500 hover:border-stone-700 hover:bg-stone-700 hover:text-white transition-all duration-300 transform hover:scale-110"
+                      onClick={(e) => {
+                        // Fallback for browsers that might block mailto
+                        if (navigator.userAgent.includes("Chrome")) {
+                          window.open(
+                            "https://mail.google.com/mail/?view=cm&fs=1&to=pandey.aditya2304@gmail.com&su=Hello%20Aditya&body=Hi%20Aditya,%0A%0AI%20found%20your%20portfolio%20and%20would%20like%20to%20connect.",
+                            "_blank",
+                          )
+                          e.preventDefault()
+                        }
+                      }}
                     >
                       <Mail className="w-5 h-5" />
                     </a>
@@ -537,6 +473,66 @@ export default function Portfolio() {
       </section>
 
       <section
+        id="about"
+        className={`py-16 px-6 relative transition-all duration-1000 bg-stone-200 text-stone-900 ${
+          visibleSections.has("about") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+        }`}
+      >
+        <div className="absolute inset-0">
+          <BackgroundPaths title="ABOUT ME" />
+        </div>
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 font-sans text-white">ABOUT ME</h2>
+            <div className="w-24 h-1 mx-auto bg-white"></div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <div className="bg-white/90 backdrop-blur-sm border-2 border-stone-600 p-8 rounded-lg">
+                <h3 className="text-2xl font-bold mb-4 font-sans text-stone-800">My Journey</h3>
+                <p className="text-stone-700 leading-relaxed font-sans mb-4">
+                  I'm not your typical final-year student. While others are cramming for exams, I'm building AI systems
+                  that actually work in the real world. Currently pursuing BTech in AI/ML at Shri Ramdeobaba College,
+                  I've already mastered PyTorch, TensorFlow, and the entire modern AI stack.
+                </p>
+                <p className="text-stone-700 leading-relaxed font-sans">
+                  But here's what makes me different—I don't just follow tutorials. My cricket ball tracking system
+                  didn't just achieve 86% precision by accident. It took weeks of debugging, thousands of annotated
+                  images, and more than a few 3 AM breakthroughs.
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              <div className="bg-white/90 backdrop-blur-sm border-2 border-stone-600 p-8 rounded-lg">
+                <h3 className="text-2xl font-bold mb-4 font-sans text-stone-800">What Drives Me</h3>
+                <p className="text-stone-700 leading-relaxed font-sans mb-4">
+                  "I don't build AI because it's trendy. I build it because there's something magical about teaching
+                  machines to think—and I'm just getting started."
+                </p>
+                <div className="space-y-3">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-stone-600 rounded-full"></div>
+                    <span className="text-sm font-sans text-stone-800">Autonomous AI Agents</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-stone-600 rounded-full"></div>
+                    <span className="text-sm font-sans text-stone-800">Real-time Computer Vision</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-2 h-2 bg-stone-600 rounded-full"></div>
+                    <span className="text-sm font-sans text-stone-800">Scalable Data Pipelines</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
         id="projects"
         className={`py-16 px-6 relative transition-all duration-1000 bg-stone-50 text-stone-900 ${
           visibleSections.has("projects") ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
@@ -552,75 +548,11 @@ export default function Portfolio() {
             ></div>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
-              <article
-                key={index}
-                className={`border-2 p-6 transform transition-all duration-700 hover:scale-105 hover:shadow-2xl bg-stone-50 border-stone-600 hover:border-stone-500 cursor-pointer ${
-                  visibleSections.has("projects") ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0"
-                }`}
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
-                <div className={`border-b pb-4 mb-4 group border-stone-500`}>
-                  <h3
-                    className={`text-xl font-bold leading-tight mb-2 transition-colors duration-300 group-hover:text-stone-600 font-sans text-stone-800`}
-                  >
-                    {project.title}
-                  </h3>
-                  <p className={`text-sm font-medium uppercase tracking-wide text-stone-600 font-sans`}>
-                    {project.subtitle}
-                  </p>
-                </div>
-
-                <div className="mb-4">
-                  <div
-                    className={`px-3 py-1 inline-block mb-3 transform transition-all duration-300 hover:scale-110 bg-stone-100 text-stone-900 hover:bg-stone-200`}
-                  >
-                    <span className="font-bold text-xs font-mono">{project.impact}</span>
-                  </div>
-                  <p className={`leading-relaxed mb-3 text-sm text-stone-700 font-sans line-clamp-4`}>
-                    {project.description}
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-2 gap-2 mb-4">
-                  {project.metrics.slice(0, 4).map((metric, idx) => (
-                    <div
-                      key={idx}
-                      className={`text-center border p-2 transform transition-all duration-300 hover:scale-105 border-stone-500 hover:bg-stone-700 hover:text-white hover:border-stone-700`}
-                      style={{ transitionDelay: `${idx * 50}ms` }}
-                    >
-                      <span className="font-bold text-xs font-sans">{metric}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="flex gap-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className={`bg-transparent transform transition-all duration-300 hover:scale-105 border-stone-600 text-stone-900 hover:bg-stone-700 hover:text-white flex-1 font-sans`}
-                    asChild
-                  >
-                    <a href={project.github} target="_blank" rel="noreferrer">
-                      <Github className="w-3 h-3 mr-1" />
-                      Code
-                    </a>
-                  </Button>
-                  <Button
-                    size="sm"
-                    className={`transform transition-all duration-300 hover:scale-105 bg-stone-100 text-stone-900 hover:bg-stone-200 flex-1 font-sans`}
-                    asChild
-                  >
-                    <Link href={`/projects/${project.id}`}>
-                      <ExternalLink className="w-3 h-3 mr-1" />
-                      Details
-                    </Link>
-                  </Button>
-                </div>
-              </article>
+          <BentoGrid className="lg:grid-rows-3 max-w-6xl mx-auto">
+            {bentoProjects.map((project) => (
+              <BentoCard key={project.name} {...project} />
             ))}
-          </div>
+          </BentoGrid>
         </div>
       </section>
 
@@ -713,6 +645,14 @@ export default function Portfolio() {
               <div
                 className={`border p-6 text-center transform transition-all duration-300 hover:scale-105 hover:shadow-lg border-stone-600 hover:border-stone-500`}
               >
+                <h4 className="font-bold mb-2 font-sans">
+                  Oracle Cloud Infrastructure 2025 Certified Data Science Professional
+                </h4>
+                <p className={`text-sm text-stone-600 font-sans`}>Oracle • Sep 2025</p>
+              </div>
+              <div
+                className={`border p-6 text-center transform transition-all duration-300 hover:scale-105 hover:shadow-lg border-stone-600 hover:border-stone-500`}
+              >
                 <h4 className="font-bold mb-2 font-sans">Machine Learning Specialization</h4>
                 <p className={`text-sm text-stone-600 font-sans`}>Andrew NG, Stanford University • Nov 2023</p>
               </div>
@@ -743,10 +683,19 @@ export default function Portfolio() {
           <div className="grid md:grid-cols-3 gap-6 mb-12">
             {[
               {
-                href: "mailto:pandey.aditya2304@gmail.com",
+                href: "mailto:pandey.aditya2304@gmail.com?subject=Hello%20Aditya&body=Hi%20Aditya,%0A%0AI%20found%20your%20portfolio%20and%20would%20like%20to%20connect.",
                 icon: Mail,
                 title: "EMAIL",
                 subtitle: "pandey.aditya2304@gmail.com",
+                onClick: (e: React.MouseEvent) => {
+                  if (navigator.userAgent.includes("Chrome")) {
+                    window.open(
+                      "https://mail.google.com/mail/?view=cm&fs=1&to=pandey.aditya2304@gmail.com&su=Hello%20Aditya&body=Hi%20Aditya,%0A%0AI%20found%20your%20portfolio%20and%20would%20like%20to%20connect.",
+                      "_blank",
+                    )
+                    e.preventDefault()
+                  }
+                },
               },
               {
                 href: "https://linkedin.com/in/ap2304",
@@ -761,7 +710,6 @@ export default function Portfolio() {
                 subtitle: "github.com/aditya-pandey-ai",
               },
             ].map((contact, index) => (
-              // Fixed font consistency - using font-sans for contact buttons
               <Button
                 key={index}
                 className={`p-6 h-auto flex-col transform transition-all duration-500 hover:scale-110 hover:rotate-1 hover:shadow-2xl bg-stone-700 text-white hover:bg-stone-600 font-sans ${
@@ -774,6 +722,7 @@ export default function Portfolio() {
                   href={contact.href}
                   target={contact.href.startsWith("http") ? "_blank" : undefined}
                   rel={contact.href.startsWith("http") ? "noreferrer" : undefined}
+                  onClick={contact.onClick}
                 >
                   {React.createElement(contact.icon, { className: "w-6 h-6 mb-2 animate-bounce" })}
                   <span className="font-bold">{contact.title}</span>
@@ -796,7 +745,7 @@ export default function Portfolio() {
         />
         <div className="max-w-7xl mx-auto text-center relative z-10">
           <p className="text-sm font-medium uppercase tracking-wide font-sans">
-            © 2024 Aditya Pandey • Built with precision and passion for AI • All rights reserved
+            © 2025 Aditya Pandey • Built with precision and passion for AI • All rights reserved
           </p>
         </div>
       </footer>
